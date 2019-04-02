@@ -2,9 +2,9 @@
   "name": "roomba",
   "version": "1.0.0",
   "description": "Tech Test - Navigate an imaginary robotic hoover (much like a Roomba) through an equally imaginary room",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "npx jest --coverage --verbose --watch"
+    "test": "npx jest --verbose --watch"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/jonurry/roomba/issues"
   },
-  "homepage": "https://github.com/jonurry/roomba#readme"
+  "homepage": "https://github.com/jonurry/roomba#readme",
+  "devDependencies": {
+    "jest": "^24.6.0"
+  }
 }
