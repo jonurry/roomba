@@ -73,6 +73,37 @@ describe('roomba', () => {
         expect(positionsEqual(roomba.position, { x: 1, y: 2 })).toBe(true);
       });
     });
-    describe('blocked by wall', () => {});
+
+    describe('blocked by walls', () => {
+      let roomba;
+
+      beforeEach(() => {
+        roomba = new Roomba({
+          columns: 1,
+          rows: 1,
+          position: { x: 1, y: 1 }
+        });
+      });
+
+      test('cannot move North', () => {
+        roomba.move('N');
+        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+      });
+
+      test('cannot move East', () => {
+        roomba.move('E');
+        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+      });
+
+      test('cannot move South', () => {
+        roomba.move('S');
+        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+      });
+
+      test('cannot move West', () => {
+        roomba.move('W');
+        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+      });
+    });
   });
 });
