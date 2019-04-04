@@ -10,9 +10,16 @@ const sample = {
 
 describe('roomba', () => {
   describe('#constructor', () => {
-    test('room should have correct dimensions', () => {
+    test('room should have correct number of rows', () => {
       let roomba = new Roomba(sample);
-      expect(roomba.room.length).toEqual(5);
+      expect(roomba.room.length).toEqual(sample.rows);
+    });
+
+    test('room should have correct number of columns', () => {
+      let roomba = new Roomba(sample);
+      roomba.room.forEach(row => {
+        expect(row.length).toEqual(sample.columns);
+      });
     });
   });
 });
