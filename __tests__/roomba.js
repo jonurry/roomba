@@ -10,15 +10,33 @@ const sample = {
 
 describe('roomba', () => {
   describe('#constructor', () => {
-    test('room should have correct number of rows', () => {
-      let roomba = new Roomba(sample);
-      expect(roomba.room.length).toEqual(sample.rows);
+    let roomba;
+
+    beforeAll(() => {
+      roomba = new Roomba(sample);
     });
 
     test('room should have correct number of columns', () => {
-      let roomba = new Roomba(sample);
-      roomba.room.forEach(row => {
-        expect(row.length).toEqual(sample.columns);
+      expect(roomba.room.length).toEqual(sample.columns);
+    });
+
+    test('room should have correct number of rows', () => {
+      console.log(roomba.room);
+      roomba.room.forEach(column => {
+        expect(column.length).toEqual(sample.rows);
+      });
+    });
+
+    test('dirt should be placed correctly', () => {
+      roomba.room.forEach((row, y) => {
+        roomba.room.forEach((col, x) => {
+          //console.log(`x: ${x}, y: ${y}`);
+          expect(roomba.room[x][y]).toBe(
+            sample.dirt.some(dirt => {
+              return dirt[0] === x && dirt[1] === y;
+            })
+          );
+        });
       });
     });
   });
