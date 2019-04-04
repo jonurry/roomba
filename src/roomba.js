@@ -12,7 +12,7 @@ const positionAfterMove = (pos, move) => {
 };
 
 const isPositionValid = (pos, columns, rows) => {
-  return pos.x > 0 && pos.y > 0 && pos.x <= columns && pos.y <= rows;
+  return pos.x >= 0 && pos.y >= 0 && pos.x < columns && pos.y < rows;
 };
 
 export default class Roomba {

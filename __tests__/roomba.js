@@ -49,28 +49,28 @@ describe('roomba', () => {
         roomba = new Roomba({
           columns: 3,
           rows: 3,
-          position: { x: 2, y: 2 }
+          position: { x: 1, y: 1 }
         });
       });
 
       test('can move North', () => {
         roomba.move('N');
-        expect(positionsEqual(roomba.position, { x: 2, y: 3 })).toBe(true);
+        expect(positionsEqual(roomba.position, { x: 1, y: 2 })).toBe(true);
       });
 
       test('can move East', () => {
         roomba.move('E');
-        expect(positionsEqual(roomba.position, { x: 3, y: 2 })).toBe(true);
+        expect(positionsEqual(roomba.position, { x: 2, y: 1 })).toBe(true);
       });
 
       test('can move South', () => {
         roomba.move('S');
-        expect(positionsEqual(roomba.position, { x: 2, y: 1 })).toBe(true);
+        expect(positionsEqual(roomba.position, { x: 1, y: 0 })).toBe(true);
       });
 
       test('can move West', () => {
         roomba.move('W');
-        expect(positionsEqual(roomba.position, { x: 1, y: 2 })).toBe(true);
+        expect(positionsEqual(roomba.position, { x: 0, y: 1 })).toBe(true);
       });
     });
 
@@ -81,28 +81,28 @@ describe('roomba', () => {
         roomba = new Roomba({
           columns: 1,
           rows: 1,
-          position: { x: 1, y: 1 }
+          position: { x: 0, y: 0 }
         });
       });
 
       test('cannot move North', () => {
         roomba.move('N');
-        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+        expect(positionsEqual(roomba.position, { x: 0, y: 0 })).toBe(true);
       });
 
       test('cannot move East', () => {
         roomba.move('E');
-        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+        expect(positionsEqual(roomba.position, { x: 0, y: 0 })).toBe(true);
       });
 
       test('cannot move South', () => {
         roomba.move('S');
-        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+        expect(positionsEqual(roomba.position, { x: 0, y: 0 })).toBe(true);
       });
 
       test('cannot move West', () => {
         roomba.move('W');
-        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+        expect(positionsEqual(roomba.position, { x: 0, y: 0 })).toBe(true);
       });
     });
 
