@@ -41,7 +41,7 @@ describe('roomba', () => {
     });
   });
 
-  describe('move', () => {
+  describe('#move', () => {
     describe('can move freely', () => {
       let roomba;
 
@@ -116,6 +116,19 @@ describe('roomba', () => {
         roomba.move('z');
         expect(positionsEqual(roomba.position, { x: 0, y: 0 })).toBe(true);
       });
+    });
+  });
+
+  describe('#drive', () => {
+    let roomba;
+
+    beforeAll(() => {
+      roomba = new Roomba(sample);
+    });
+
+    test('final position', () => {
+      roomba.drive();
+      expect(positionsEqual(roomba.position, { x: 1, y: 3 })).toBe(true);
     });
   });
 });

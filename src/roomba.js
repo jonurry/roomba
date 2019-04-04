@@ -20,6 +20,12 @@ export default class Roomba {
     Object.assign(this, initialState);
   }
 
+  drive() {
+    this.drivingInstructions.forEach(direction => {
+      this.move(direction);
+    });
+  }
+
   move(direction) {
     const newPos = positionAfterMove(this.position, direction);
     this.position = isPositionValid(newPos, this.columns, this.rows)
