@@ -3,9 +3,13 @@ import Roomba from '../src/roomba.js';
 const sample = {
   columns: 5,
   rows: 5,
-  startPos: [1, 2],
-  dirt: [[1, 0], [2, 2], [2, 3]],
+  position: { x: 1, y: 2 },
+  dirt: [{ x: 1, y: 0 }, { x: 2, y: 2 }, { x: 2, y: 3 }],
   drivingInstructions: ['N', 'N', 'E', 'S', 'E', 'E', 'S', 'W', 'N', 'W', 'W']
+};
+
+const positionsEqual = (pos1, pos2) => {
+  return pos1.x === pos2.x && pos1.y === pos2.y;
 };
 
 describe('roomba', () => {
@@ -17,26 +21,22 @@ describe('roomba', () => {
     });
 
     test('room should have correct number of columns', () => {
-      expect(roomba.room.length).toEqual(sample.columns);
+      expect(roomba.columns).toEqual(sample.columns);
     });
 
     test('room should have correct number of rows', () => {
-      console.log(roomba.room);
-      roomba.room.forEach(column => {
-        expect(column.length).toEqual(sample.rows);
-      });
+      expect(roomba.rows).toEqual(sample.rows);
     });
 
     test('dirt should be placed correctly', () => {
-      roomba.room.forEach((row, y) => {
-        roomba.room.forEach((col, x) => {
-          //console.log(`x: ${x}, y: ${y}`);
-          expect(roomba.room[x][y]).toBe(
-            sample.dirt.some(dirt => {
-              return dirt[0] === x && dirt[1] === y;
-            })
-          );
-        });
+      sample.dirt.forEach((pos, i) => {
+        expect(positionsEqual(roomba.dirt[i], pos)).toBe(true);
+      });
+    });
+
+    test('driving instructions should be set correctly', () => {
+      sample.drivingInstructions.forEach((direction, i) => {
+        expect(roomba.drivingInstructions[i]).toBe(direction);
       });
     });
   });
