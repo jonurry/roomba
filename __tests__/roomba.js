@@ -35,6 +35,10 @@ describe('roomba', () => {
         expect(roomba.drivingInstructions[i]).toBe(direction);
       });
     });
+
+    test('hoovered dirt counter should start at zero', () => {
+      expect(roomba.hooveredDirt).toBe(0);
+    });
   });
 
   describe('#move', () => {
