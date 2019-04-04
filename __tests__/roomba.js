@@ -111,10 +111,10 @@ describe('roomba', () => {
         let roomba = new Roomba({
           columns: 1,
           rows: 1,
-          position: { x: 1, y: 1 }
+          position: { x: 0, y: 0 }
         });
         roomba.move('z');
-        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+        expect(positionsEqual(roomba.position, { x: 0, y: 0 })).toBe(true);
       });
     });
   });
