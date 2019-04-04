@@ -6,7 +6,9 @@ const validMoves = {
 };
 
 const positionAfterMove = (pos, move) => {
-  return { x: pos.x + validMoves[move].x, y: pos.y + validMoves[move].y };
+  let theMove = validMoves[move];
+  if (theMove === undefined) theMove = { x: 0, y: 0 };
+  return { x: pos.x + theMove.x, y: pos.y + theMove.y };
 };
 
 const isPositionValid = (pos, columns, rows) => {

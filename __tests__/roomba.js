@@ -105,5 +105,17 @@ describe('roomba', () => {
         expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
       });
     });
+
+    describe('invalid move', () => {
+      test('direction is invalid', () => {
+        let roomba = new Roomba({
+          columns: 1,
+          rows: 1,
+          position: { x: 1, y: 1 }
+        });
+        roomba.move('z');
+        expect(positionsEqual(roomba.position, { x: 1, y: 1 })).toBe(true);
+      });
+    });
   });
 });
