@@ -7,29 +7,34 @@ const makeCoordinates = (x, y) => {
   return { x: Number(x), y: Number(y) };
 };
 
-const getColumns = dimensions => {
+const getColumns = data => {
   // first number in first item of data array
-  return Number(dimensions[0].split(' ')[0]);
+  return Number(data[0].split(' ')[0]);
 };
 
-const getDirt = () => {
-  return [];
+const getDirt = data => {
+  let dirt = [];
+  for (let i = 2; i < data.length - 1; i++) {
+    const pos = data[i].split(' ');
+    dirt.push(makeCoordinates(pos[0], pos[1]));
+  }
+  return dirt;
 };
 
-const getDrivingInstructions = i => {
+const getDrivingInstructions = data => {
   // last item in data array converted to an array
-  return Array.from(i[i.length - 1]);
+  return Array.from(data[data.length - 1]);
 };
 
-const getInitialPosition = xy => {
+const getInitialPosition = data => {
   // second item in data array converted to coordinates
-  const pos = xy[1].split(' ');
+  const pos = data[1].split(' ');
   return makeCoordinates(pos[0], pos[1]);
 };
 
-const getRows = dimensions => {
+const getRows = data => {
   // second number in first item of data array
-  return Number(dimensions[0].split(' ')[1]);
+  return Number(data[0].split(' ')[1]);
 };
 
 const parse = data => {
@@ -39,7 +44,7 @@ const parse = data => {
   output['rows'] = getRows(a);
   output['position'] = getInitialPosition(a);
   output['drivingInstructions'] = getDrivingInstructions(a);
-  output['dirt'] = getDirt();
+  output['dirt'] = getDirt(a);
   return output;
 };
 

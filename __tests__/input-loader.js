@@ -15,7 +15,7 @@ const sampleOutput = {
   drivingInstructions: ['N', 'N', 'E', 'S', 'E', 'E', 'S', 'W', 'N', 'W', 'W']
 };
 
-const noDirtSample = `5 5
+const sampleNoDirt = `5 5
 1 2
 NNESEESWNWW`;
 
@@ -34,12 +34,17 @@ describe('input loader', () => {
   });
 
   test('take data as argument', () => {
-    const loader = new InputLoader(noDirtSample);
-    expect(loader.data).toEqual(noDirtSample);
+    const loader = new InputLoader(sampleNoDirt);
+    expect(loader.data).toEqual(sampleNoDirt);
   });
 
   test('expected output for no dirt sample data', () => {
-    const loader = new InputLoader(noDirtSample);
+    const loader = new InputLoader(sampleNoDirt);
     expect(loader.output()).toEqual(sampleOutputNoDirt);
+  });
+
+  test('expected output for sample data', () => {
+    const loader = new InputLoader(sample);
+    expect(loader.output()).toEqual(sampleOutput);
   });
 });
