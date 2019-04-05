@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx babel src --out-dir lib",
     "lint": "npx eslint ./src",
-    "test": "npx jest --verbose --watch"
+    "test": "npx jest --coverage --verbose",
+    "test:watch": "npx jest --watch"
   },
   "repository": {
     "type": "git",
