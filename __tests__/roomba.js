@@ -49,7 +49,8 @@ describe('roomba', () => {
         roomba = new Roomba({
           columns: 3,
           rows: 3,
-          position: { x: 1, y: 1 }
+          position: { x: 1, y: 1 },
+          dirt: []
         });
       });
 
@@ -81,7 +82,8 @@ describe('roomba', () => {
         roomba = new Roomba({
           columns: 1,
           rows: 1,
-          position: { x: 0, y: 0 }
+          position: { x: 0, y: 0 },
+          dirt: []
         });
       });
 
@@ -111,7 +113,8 @@ describe('roomba', () => {
         let roomba = new Roomba({
           columns: 1,
           rows: 1,
-          position: { x: 0, y: 0 }
+          position: { x: 0, y: 0 },
+          dirt: []
         });
         roomba.move('z');
         expect(roomba.position).toEqual({ x: 0, y: 0 });
@@ -120,15 +123,18 @@ describe('roomba', () => {
   });
 
   describe('#drive', () => {
-    let roomba;
-
-    beforeAll(() => {
-      roomba = new Roomba(sample);
-    });
-
     test('final position', () => {
+      let roomba = new Roomba(sample);
       roomba.drive();
       expect(roomba.position).toEqual({ x: 1, y: 3 });
+    });
+  });
+
+  describe('#clean', () => {
+    test('cleaned dirt', () => {
+      let roomba = new Roomba(sample);
+      roomba.drive();
+      expect(roomba.hooveredDirt).toBe(1);
     });
   });
 });

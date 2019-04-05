@@ -21,6 +21,14 @@ export default class Roomba {
     this.hooveredDirt = 0;
   }
 
+  clean() {
+    const dirtCount = this.dirt.length;
+    this.dirt = this.dirt.filter(dirt => {
+      return dirt.x !== this.position.x || dirt.y !== this.position.y;
+    });
+    this.hooveredDirt += dirtCount - this.dirt.length;
+  }
+
   drive() {
     this.drivingInstructions.forEach(direction => {
       this.move(direction);
@@ -32,5 +40,6 @@ export default class Roomba {
     this.position = isPositionValid(newPos, this.columns, this.rows)
       ? newPos
       : this.position;
+    this.clean();
   }
 }
