@@ -136,5 +136,16 @@ describe('roomba', () => {
       roomba.drive();
       expect(roomba.hooveredDirt).toBe(1);
     });
+
+    test('clean floor on initial placement', () => {
+      let roomba = new Roomba({
+        columns: 1,
+        rows: 1,
+        position: { x: 0, y: 0 },
+        dirt: [{ x: 0, y: 0 }]
+      });
+      expect(roomba.hooveredDirt).toBe(1);
+      expect(roomba.dirt).toEqual([]);
+    });
   });
 });
