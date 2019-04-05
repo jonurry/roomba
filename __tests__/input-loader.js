@@ -7,9 +7,25 @@ const sample = `5 5
 2 3
 NNESEESWNWW`;
 
+const sampleOutput = {
+  columns: 5,
+  rows: 5,
+  position: { x: 1, y: 2 },
+  dirt: [{ x: 1, y: 0 }, { x: 2, y: 2 }, { x: 2, y: 3 }],
+  drivingInstructions: ['N', 'N', 'E', 'S', 'E', 'E', 'S', 'W', 'N', 'W', 'W']
+};
+
 const noDirtSample = `5 5
 1 2
 NNESEESWNWW`;
+
+const sampleOutputNoDirt = {
+  columns: 5,
+  rows: 5,
+  position: { x: 1, y: 2 },
+  dirt: [],
+  drivingInstructions: ['N', 'N', 'E', 'S', 'E', 'E', 'S', 'W', 'N', 'W', 'W']
+};
 
 describe('input loader', () => {
   test('load data from input.txt', () => {
@@ -20,5 +36,10 @@ describe('input loader', () => {
   test('take data as argument', () => {
     const loader = new InputLoader(noDirtSample);
     expect(loader.data).toEqual(noDirtSample);
+  });
+
+  test('expected output for no dirt sample data', () => {
+    const loader = new InputLoader(noDirtSample);
+    expect(loader.output()).toEqual(sampleOutputNoDirt);
   });
 });
