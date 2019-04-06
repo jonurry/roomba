@@ -7,5 +7,6 @@ const checkPositiveNumber = (name, value) => {
 export default class Validator {
   check(data) {
     checkPositiveNumber('columns', data.columns);
+    checkPositiveNumber('rows', data.rows);
   }
 }
