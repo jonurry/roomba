@@ -16,24 +16,12 @@ describe('roomba', () => {
       roomba = new Roomba(sample);
     });
 
-    test('room should have correct number of columns', () => {
+    test('room should contain sample data', () => {
       expect(roomba.columns).toEqual(sample.columns);
-    });
-
-    test('room should have correct number of rows', () => {
       expect(roomba.rows).toEqual(sample.rows);
-    });
-
-    test('dirt should be placed correctly', () => {
-      sample.dirt.forEach((pos, i) => {
-        expect(roomba.dirt[i]).toEqual(pos);
-      });
-    });
-
-    test('driving instructions should be set correctly', () => {
-      sample.drivingInstructions.forEach((direction, i) => {
-        expect(roomba.drivingInstructions[i]).toBe(direction);
-      });
+      expect(roomba.position).toEqual(sample.position);
+      expect(roomba.dirt).toEqual(sample.dirt);
+      expect(roomba.drivingInstructions).toEqual(sample.drivingInstructions);
     });
 
     test('hoovered dirt counter should start at zero', () => {
@@ -77,47 +65,49 @@ describe('roomba', () => {
 
     describe('blocked by walls', () => {
       let roomba;
+      const initialPosition = { x: 0, y: 0 };
 
       beforeEach(() => {
         roomba = new Roomba({
           columns: 1,
           rows: 1,
-          position: { x: 0, y: 0 },
+          position: initialPosition,
           dirt: []
         });
       });
 
       test('cannot move North', () => {
         roomba.move('N');
-        expect(roomba.position).toEqual({ x: 0, y: 0 });
+        expect(roomba.position).toEqual(initialPosition);
       });
 
       test('cannot move East', () => {
         roomba.move('E');
-        expect(roomba.position).toEqual({ x: 0, y: 0 });
+        expect(roomba.position).toEqual(initialPosition);
       });
 
       test('cannot move South', () => {
         roomba.move('S');
-        expect(roomba.position).toEqual({ x: 0, y: 0 });
+        expect(roomba.position).toEqual(initialPosition);
       });
 
       test('cannot move West', () => {
         roomba.move('W');
-        expect(roomba.position).toEqual({ x: 0, y: 0 });
+        expect(roomba.position).toEqual(initialPosition);
       });
     });
 
     describe('invalid move', () => {
       test('direction is invalid', () => {
+        const initialPosition = { x: 1, y: 1 };
         let roomba = new Roomba({
-          columns: 1,
-          rows: 1,
-          position: { x: 0, y: 0 },
+          columns: 3,
+          rows: 3,
+          position: initialPosition,
           dirt: []
         });
         roomba.move('z');
-        expect(roomba.position).toEqual({ x: 0, y: 0 });
+        expect(roomba.position).toEqual(initialPosition);
       });
     });
   });
