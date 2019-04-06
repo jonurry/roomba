@@ -1,3 +1,5 @@
+import Validator from './validator.js';
+
 const validMoves = {
   N: { x: 0, y: 1 },
   E: { x: 1, y: 0 },
@@ -18,8 +20,9 @@ const isPositionValid = (pos, columns, rows) => {
 };
 
 export default class Roomba {
-  constructor(initialState) {
+  constructor(initialState, validator = new Validator()) {
     Object.assign(this, initialState);
+    validator.check(this);
     this.hooveredDirt = 0;
     this.clean();
   }

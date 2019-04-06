@@ -1,3 +1,5 @@
 export default class Validator {
-  check() {}
+  check() {
+    console.log('Inside Validator');
+  }
 }

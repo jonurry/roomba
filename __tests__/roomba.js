@@ -1,5 +1,9 @@
 import Roomba from '../src/roomba.js';
 
+const mockValidator = {
+  check: jest.fn()
+};
+
 const sample = {
   columns: 5,
   rows: 5,
@@ -13,7 +17,7 @@ describe('roomba', () => {
     let roomba;
 
     beforeAll(() => {
-      roomba = new Roomba(sample);
+      roomba = new Roomba(sample, mockValidator);
     });
 
     test('room should contain sample data', () => {
@@ -23,6 +27,13 @@ describe('roomba', () => {
     test('hoovered dirt counter should start at zero', () => {
       expect(roomba.hooveredDirt).toBe(0);
     });
+
+    test('input is validated', () => {
+      mockValidator.check.mockClear();
+      // need separate instantiation to verify that validator was called
+      new Roomba(sample, mockValidator);
+      expect(mockValidator.check).toHaveBeenCalled();
+    });
   });
 
   describe('#move', () => {
@@ -30,12 +41,15 @@ describe('roomba', () => {
       let roomba;
 
       beforeEach(() => {
-        roomba = new Roomba({
-          columns: 3,
-          rows: 3,
-          position: { x: 1, y: 1 },
-          dirt: []
-        });
+        roomba = new Roomba(
+          {
+            columns: 3,
+            rows: 3,
+            position: { x: 1, y: 1 },
+            dirt: []
+          },
+          mockValidator
+        );
       });
 
       test('can move North', () => {
@@ -64,12 +78,15 @@ describe('roomba', () => {
       const initialPosition = { x: 0, y: 0 };
 
       beforeEach(() => {
-        roomba = new Roomba({
-          columns: 1,
-          rows: 1,
-          position: initialPosition,
-          dirt: []
-        });
+        roomba = new Roomba(
+          {
+            columns: 1,
+            rows: 1,
+            position: initialPosition,
+            dirt: []
+          },
+          mockValidator
+        );
       });
 
       test('cannot move North', () => {
@@ -96,12 +113,15 @@ describe('roomba', () => {
     describe('invalid move', () => {
       test('direction is invalid', () => {
         const initialPosition = { x: 1, y: 1 };
-        let roomba = new Roomba({
-          columns: 3,
-          rows: 3,
-          position: initialPosition,
-          dirt: []
-        });
+        let roomba = new Roomba(
+          {
+            columns: 3,
+            rows: 3,
+            position: initialPosition,
+            dirt: []
+          },
+          mockValidator
+        );
         roomba.move('z');
         expect(roomba.position).toEqual(initialPosition);
       });
@@ -110,7 +130,7 @@ describe('roomba', () => {
 
   describe('#drive', () => {
     test('final position', () => {
-      let roomba = new Roomba(sample);
+      let roomba = new Roomba(sample, mockValidator);
       roomba.drive();
       expect(roomba.position).toEqual({ x: 1, y: 3 });
     });
@@ -118,18 +138,21 @@ describe('roomba', () => {
 
   describe('#clean', () => {
     test('cleaned dirt', () => {
-      let roomba = new Roomba(sample);
+      let roomba = new Roomba(sample, mockValidator);
       roomba.drive();
       expect(roomba.hooveredDirt).toBe(1);
     });
 
     test('clean floor on initial placement', () => {
-      let roomba = new Roomba({
-        columns: 1,
-        rows: 1,
-        position: { x: 0, y: 0 },
-        dirt: [{ x: 0, y: 0 }]
-      });
+      let roomba = new Roomba(
+        {
+          columns: 1,
+          rows: 1,
+          position: { x: 0, y: 0 },
+          dirt: [{ x: 0, y: 0 }]
+        },
+        mockValidator
+      );
       expect(roomba.hooveredDirt).toBe(1);
       expect(roomba.dirt).toEqual([]);
     });
