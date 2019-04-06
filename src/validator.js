@@ -1,11 +1,24 @@
+const checkArrayType = (name, value) => {
+  if (Array.isArray(value) === false) {
+    throw `Validation error, '${name}' must be an Array.`;
+  }
+};
+
 const checkCoordinates = (name, value, maxX, maxY) => {
   if (value['x'] === undefined || value['y'] === undefined) {
     throw `Validation error, '${name}' must contain an 'x' and 'y' coordinate. Value passed was ${value}`;
   }
   checkWrongType(`${name}.x`, value.x, 'number');
   checkWrongType(`${name}.y`, value.y, 'number');
-  checkNumberRange(`${name}.x`, value.x, 0, maxX);
-  checkNumberRange(`${name}.y`, value.y, 0, maxY);
+  checkNumberRange(`${name}.x`, value.x, 0, maxX - 1);
+  checkNumberRange(`${name}.y`, value.y, 0, maxY - 1);
+};
+
+const checkCoordinatesArray = (name, value, maxX, maxY) => {
+  checkArrayType(name, value);
+  value.forEach((pos, i) => {
+    checkCoordinates(`${name}[${i}]`, pos, maxX, maxY);
+  });
 };
 
 const checkPositiveNumber = (name, value) => {
@@ -33,5 +46,6 @@ export default class Validator {
     checkWrongType('rows', data.rows, 'number');
     checkPositiveNumber('rows', data.rows);
     checkCoordinates('position', data.position, data.columns, data.rows);
+    checkCoordinatesArray('dirt', data.dirt, data.columns, data.rows);
   }
 }

@@ -110,4 +110,30 @@ describe('validator', () => {
       validator.check(invalidPosition);
     }).toThrow();
   });
+
+  test('invalid dirt coordinates', () => {
+    const invalidDirtCoordinates = {
+      columns: 5,
+      rows: 5,
+      position: { x: 1, y: 2 },
+      dirt: [{ x: 1, y: 0 }, { x: 2, y: 2 }, { x: 2, y: -3 }],
+      drivingInstructions: []
+    };
+    expect(() => {
+      validator.check(invalidDirtCoordinates);
+    }).toThrow();
+  });
+
+  test('invalid dirt type', () => {
+    const invalidDirtType = {
+      columns: 5,
+      rows: 5,
+      position: { x: 1, y: 2 },
+      dirt: '',
+      drivingInstructions: []
+    };
+    expect(() => {
+      validator.check(invalidDirtType);
+    }).toThrow();
+  });
 });
