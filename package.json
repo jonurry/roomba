@@ -4,7 +4,7 @@
   "description": "Tech Test - Navigate an imaginary robotic hoover (much like a Roomba) through an equally imaginary room",
   "main": "app.js",
   "scripts": {
-    "build": "npx babel src --out-dir lib",
+    "build": "npx babel src --out-dir lib --copy-files ",
     "lint": "npx eslint ./src",
     "test": "npx jest --coverage --verbose",
     "test:watch": "npx jest --watch"
@@ -27,8 +27,10 @@
   },
   "homepage": "https://github.com/jonurry/roomba#readme",
   "devDependencies": {
+    "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "babel-core": "^6.26.3",
     "babel-jest": "^24.7.0",
     "eslint": "^5.16.0",
     "jest": "^24.6.0"
