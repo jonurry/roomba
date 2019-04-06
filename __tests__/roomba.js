@@ -17,11 +17,7 @@ describe('roomba', () => {
     });
 
     test('room should contain sample data', () => {
-      expect(roomba.columns).toEqual(sample.columns);
-      expect(roomba.rows).toEqual(sample.rows);
-      expect(roomba.position).toEqual(sample.position);
-      expect(roomba.dirt).toEqual(sample.dirt);
-      expect(roomba.drivingInstructions).toEqual(sample.drivingInstructions);
+      expect(roomba).toMatchObject(sample);
     });
 
     test('hoovered dirt counter should start at zero', () => {
