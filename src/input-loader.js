@@ -50,6 +50,8 @@ const parse = data => {
 
 export default class InputLoader {
   constructor(data) {
+    // if instructions are provided then use them,
+    // otherwise, read instructions from input file
     this.data = data ? data : fs.readFileSync(INPUT_FILE).toString();
   }
 

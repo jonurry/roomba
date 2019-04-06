@@ -4,13 +4,8 @@ const expectedOutput = `1 3
 1`;
 
 describe('app integration test', () => {
-  let app;
-
-  beforeAll(() => {
-    app = new App();
-  });
-
   test('check expected output', () => {
+    let app = new App();
     expect(app.output()).toBe(expectedOutput);
   });
 });

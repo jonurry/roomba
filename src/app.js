@@ -1,7 +1,6 @@
 import InputLoader from './input-loader.js';
 import Roomba from './roomba.js';
 
-// Main entry point to the application
 export default class App {
   constructor() {
     const loader = new InputLoader();
