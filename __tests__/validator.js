@@ -30,7 +30,7 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidColumns);
-    }).toThrow();
+    }).toThrow('Validation error, \'columns\' must be a number.');
   });
 
   test('invalid columns value', () => {
@@ -43,7 +43,9 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidColumns);
-    }).toThrow();
+    }).toThrow(
+      'Validation error, \'columns\' must be a positive number. Value passed was -5'
+    );
   });
 
   test('invalid rows type', () => {
@@ -56,7 +58,7 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidRows);
-    }).toThrow();
+    }).toThrow('Validation error, \'rows\' must be a number.');
   });
 
   test('invalid rows value', () => {
@@ -69,7 +71,9 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidRows);
-    }).toThrow();
+    }).toThrow(
+      'Validation error, \'rows\' must be a positive number. Value passed was -5'
+    );
   });
 
   test('invalid position format', () => {
@@ -82,7 +86,9 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidPosition);
-    }).toThrow();
+    }).toThrow(
+      'Validation error, \'position\' must contain an \'x\' and \'y\' coordinate. Value passed was [object Object]'
+    );
   });
 
   test('invalid position types', () => {
@@ -95,7 +101,7 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidPosition);
-    }).toThrow();
+    }).toThrow('Validation error, \'position.x\' must be a number.');
   });
 
   test('invalid position values', () => {
@@ -108,7 +114,9 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidPosition);
-    }).toThrow();
+    }).toThrow(
+      'Validation error, \'position.x\' must be in the range from 0 to 4 inclusive. Value passed was -1'
+    );
   });
 
   test('invalid dirt coordinates', () => {
@@ -121,7 +129,9 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidDirtCoordinates);
-    }).toThrow();
+    }).toThrow(
+      'Validation error, \'dirt[2].y\' must be in the range from 0 to 4 inclusive. Value passed was -3'
+    );
   });
 
   test('invalid dirt type', () => {
@@ -134,7 +144,7 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidDirtType);
-    }).toThrow();
+    }).toThrow('Validation error, \'dirt\' must be an Array.');
   });
 
   test('invalid driving instruction type', () => {
@@ -147,7 +157,7 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidDirtType);
-    }).toThrow();
+    }).toThrow('Validation error, \'drivingInstructions\' must be an Array.');
   });
 
   test('invalid driving instruction values', () => {
@@ -160,6 +170,8 @@ describe('validator', () => {
     };
     expect(() => {
       validator.check(invalidDirtType);
-    }).toThrow();
+    }).toThrow(
+      'Validation error, \'drivingInstructions[2]\' must be composed of N, E, S, W.'
+    );
   });
 });
