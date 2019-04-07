@@ -136,4 +136,30 @@ describe('validator', () => {
       validator.check(invalidDirtType);
     }).toThrow();
   });
+
+  test('invalid driving instruction type', () => {
+    const invalidDirtType = {
+      columns: 5,
+      rows: 5,
+      position: { x: 1, y: 2 },
+      dirt: [],
+      drivingInstructions: 0
+    };
+    expect(() => {
+      validator.check(invalidDirtType);
+    }).toThrow();
+  });
+
+  test('invalid driving instruction values', () => {
+    const invalidDirtType = {
+      columns: 5,
+      rows: 5,
+      position: { x: 1, y: 2 },
+      dirt: [],
+      drivingInstructions: ['N', 'E', 'Q', 'S']
+    };
+    expect(() => {
+      validator.check(invalidDirtType);
+    }).toThrow();
+  });
 });
